@@ -1,16 +1,40 @@
-﻿
+﻿@model CalculateAgeModel
 @{
     Layout = null;
 }
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width", initial-scale="1.0"/>
     <title>Age Calculator</title>
+    <style>
+        /*insert css styles*/
+    </style>
 </head>
 <body>
+
     <h1>Age Calculator</h1>
-    <p>Name: @ViewBag.Name</p>
-    <p>Age: @ViewBag.BD.ToString()</p>
+
+    <form asp-action="Index" method="post">
+
+        <div>
+            <label asp-for="Name">Name:</label>
+            <input asp-for="Name"/>
+        </div>
+
+        <div>
+            <label asp-for="Year">Enter 4 digit year you were born:</label>
+            <input asp-for="Year" />
+        </div>
+
+        <div>
+            <label>Your Age:</label>
+            <input value="@ViewBag.BD" readonly/>
+        </div>
+
+        <button type="submit">Calculate</button>
+        <a asp-action="Index">Clear</a>
+
+    </form>    
 </body>
 </html>
