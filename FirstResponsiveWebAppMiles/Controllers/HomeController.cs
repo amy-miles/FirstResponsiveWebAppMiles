@@ -15,8 +15,13 @@ namespace FirstResponsiveWebAppMiles.Controllers
         [HttpPost]
         public IActionResult Index(CalculateAgeModel model)
         {
-            ViewBag.BD = model.CalculateAge();
-            return View();
+            if (ModelState.IsValid)
+            {
+                ViewBag.BD = model.CalculateAge();
+            }
+            else { ViewBag.BD = null; }
+            
+            return View(model);
         }
     }
 }

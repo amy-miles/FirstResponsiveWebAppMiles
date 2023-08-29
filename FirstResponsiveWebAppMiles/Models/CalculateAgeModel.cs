@@ -1,20 +1,26 @@
-﻿namespace FirstResponsiveWebAppMiles.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FirstResponsiveWebAppMiles.Models
 {
     public class CalculateAgeModel
     {
+        [Required (ErrorMessage ="Please enter your name.")]
         public String? Name { get; set; }
-        public int Year { get; set; }
-        public String? Age { get; set; }
-        public String AgeTrimmed { get; set; }
+        
+        [Required (ErrorMessage ="You must enter a year.")]
+        [RegularExpression(@"^(\d{4})$", ErrorMessage = "Enter a valid 4 digit Year")]
+        public int? Year { get; set; }//var to hold user year born
+
+        public int? CurrentYear { get; set; }
+        public int? Age { get; set; }      
         public DateTime CurrentDate { get; set; }
 
         public String CalculateAge()
         {
             CurrentDate = DateTime.Now; //get current date
-            DateTime dateTime = CurrentDate.AddYears(-Year);
-            Age = dateTime.ToString("yyyy");
-            AgeTrimmed = Age.TrimStart(new Char[] { '0' });
-            return Name + " is " + AgeTrimmed + " years old today!";
+            CurrentYear = int.Parse(CurrentDate.ToString("yyyy"));//get current year            
+            Age = CurrentYear - Year;//calculating the age            
+            return Name + " is " + Age + " years old today!";//returning concat. string
         }
     }
 }
