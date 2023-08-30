@@ -1,6 +1,6 @@
 ﻿@model CalculateAgeModel
 @{
-    Layout = null;
+    ViewData["Title"] = "Age Calculator";
 }
 <!DOCTYPE html>
 <html>
@@ -21,29 +21,43 @@
 </head>
 <body>
 
-    <h1>Age Calculator</h1>
+    
+    <div class="container">
+        
+        <form asp-action="Index" method="post">
+            <div>
+            <h2 class="mt-3 mb-4">@ViewBag.Title</h2>
+            <div asp-validation-summary="All"></div>
 
-    <form asp-action="Index" method="post">
-        <div asp-validation-summary="All"></div>
+                <div class="row">                    
+                    <label asp-for="Name" class="col-md-3 col-form-label">Name:</label>
+                    <div class="col-md-3">
+                        <input asp-for="Name" />
+                    </div>                    
+                </div>
 
-        <div>
-            <label asp-for="Name">Name:</label>
-            <input asp-for="Name"/>
-        </div>
+                <div class="row">
+                    <label asp-for="Year" class="col-md-3 col-form-label">Enter year you were born:</label>
+                    <div class="col-md-3">
+                        <input asp-for="Year" />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <label class="col-md-3 col-form-label">Your Age:</label>
+                    <div class="col-md-3">
+                        <input value="@ViewBag.BD" readonly/>
+                     </div>
+                </div>
 
-        <div>
-            <label asp-for="Year">Enter 4 digit year you were born:</label>
-            <input asp-for="Year" />
-        </div>
-
-        <div>
-            <label>Your Age:</label>
-            <input value="@ViewBag.BD" readonly/>
-        </div>
-
-        <button type="submit">Calculate</button>
-        <a asp-action="Index">Clear</a>
-
-    </form>    
+                <div class="row">
+                    <div class="col offset-md-3">
+                        <button type="submit" class="btn btn-primary">Calculate</button>
+                        <a asp-action="Index" class="btn btn-secondary">Clear</a>
+                    </div>
+                </div>
+            </div>
+        </form> 
+    </div>
 </body>
 </html>
